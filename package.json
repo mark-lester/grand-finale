@@ -1,0 +1,35 @@
+{
+  "name": "grand-finale",
+  "version": "0.0.0",
+  "description": "finale extension",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mark-lester/grand-finale.git"
+  },
+  "keywords": [
+    "finale",
+    "sequelize",
+    "pangolin"
+  ],
+  "author": "mark lester",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mark-lester/grand-finale/issues"
+  },
+  "homepage": "https://github.com/mark-lester/grand-finale#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "finale-rest": "^1.1.1",
+    "mysql2": "^2.1.0",
+    "require-dir": "^1.2.0",
+    "sequelize": "^6.3.4",
+    "underscore": "^1.10.2"
+  }
+}

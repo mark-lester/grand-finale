@@ -5,6 +5,8 @@ const finale=require('finale-rest')
 
 function grand_finale(options){
 	var options=options || {}
+	this.sequelize=options.sequelize
+	this.Sequelize=options.Sequelize
 	this.finale=finale
 	this.options=options
 	this.resources=[]
@@ -13,7 +15,6 @@ function grand_finale(options){
 
 grand_finale.prototype.initialize=function (options){
 	options=options || this.options
-	this.sequelize=options.sequelize
 	this.finale.initialize(options)
 	this.load(options)
 }
@@ -34,7 +35,7 @@ grand_finale.prototype.getresources=function(){
 	return this.resources;
 }
 
-grand_finale.prototype.dictionary=function (options){
+grand_finale.prototype.dictionary=async function (options){
 	return this.resources.map(resourceJSON.bind(this))
 }
 
@@ -64,12 +65,12 @@ function controllers(options){
 }
 
 function registerDictionary(){
-	this.finale.app.use(this.finale.base,handleResponse({handler:this.dictionary}))
+	this.finale.app.use(this.finale.base,handleResponse({handler:this.dictionary.bind(this)}))
 }
 
 // fake sequelize model
 function makeControllerModel(name,def){
-	var dummy=this.options.sequelize.define(name,{dummy:this.options.DataTypes.INTEGER})
+	var dummy=this.options.sequelize.define(name,{dummy:this.Sequelize.DataTypes.INTEGER})
 	dummy.findAndCountAll=def.find
 	return dummy
 }
@@ -119,8 +120,10 @@ function decirctest (k,v){
 function handleResponse(responseHandler){
 	return function(req, res){
 		res.setHeader('Content-Type', responseHandler.contentType || 'application/json');
-		responseHandler.handler.bind(this)(req)
-		.then(res.send)
+		return responseHandler.handler.bind(this)(req)
+		.then((response)=>{
+			res.send(response)
+		})
 	}.bind(this)
 }
 

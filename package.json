@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/mark-lester/grand-finale#readme",
   "dependencies": {
+    "axios": "^0.20.0",
     "express": "^4.17.1",
     "finale-rest": "^1.1.1",
     "mysql2": "^2.1.0",

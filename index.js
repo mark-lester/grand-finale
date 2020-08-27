@@ -39,7 +39,6 @@ grand_finale.prototype.dictionary=async function (options){
 	return this.resources.map(resourceJSON.bind(this))
 }
 
-
 function resourceAll(){
 	_.each(this.sequelize.models,((model,name)=>{
 		if (
@@ -50,7 +49,7 @@ function resourceAll(){
 			return
 
 		this.resource({
-			model:model
+			model:model,
 		})
 	}).bind(this))
 }

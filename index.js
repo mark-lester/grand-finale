@@ -41,6 +41,7 @@ grand_finale.prototype.dictionary=async function (options){
 
 function resourceAll(){
 	_.each(this.sequelize.models,((model,name)=>{
+		console.log("FINALE="+model.options.include)
 		if (
 			model.options &&
 			model.options.Options &&
@@ -50,6 +51,7 @@ function resourceAll(){
 
 		this.resource({
 			model:model,
+			include:model.options.include
 		})
 	}).bind(this))
 }
@@ -64,6 +66,7 @@ function controllers(options){
 }
 
 function registerDictionary(){
+	console.log("INITIALIZING "+this.finale.base)
 	this.finale.app.use(this.finale.base,handleResponse({handler:this.dictionary.bind(this)}))
 }
 

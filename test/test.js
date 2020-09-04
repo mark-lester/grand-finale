@@ -21,7 +21,7 @@ const GrandFinale=require("../index.js")
 var grand_finale=new GrandFinale({
 	app: app,
 	sequelize: sequelize,
-	Sequelize: S,
+	DataTypes: S.DataTypes,
 	directory:'./test/controllers',
 	base:'/api',
 })
